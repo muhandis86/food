@@ -204,13 +204,19 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json();
     }
 
-    getData('http://localhost:3000/menu')
-        .then(data => {
-            data.forEach(({ img, altimg, title, descr, price }) => {
+    // getData('http://localhost:3000/menu')
+    //     .then(data => {
+    //         data.forEach(({ img, altimg, title, descr, price }) => {
+    //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    //         });
+    //     });
+
+    axios.get('http://localhost:3000/menu')
+        .then(obj => {
+            obj.data.forEach(({ img, altimg, title, descr, price }) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
             });
-        });
-
+        })
 
     // Forms
 
