@@ -311,6 +311,47 @@ window.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 1;
     let offset = 0;
 
+    // ------------ creating dots for slider ---------------------
+
+    const slider = document.querySelector('.offer__slider'),
+        dotsWrapper = document.createElement('div'),
+        dots = [];
+
+    slider.style.position = 'relative';
+    dotsWrapper.classList.add('carousel-indicators');
+    slider.append(dotsWrapper);
+
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        dot.setAttribute('data-slide', i + 1);      // dot.dataset.slide = i + 1;
+        dotsWrapper.append(dot);
+        if (i == 0) dot.classList.add('active');
+        dots.push(dot);
+    }
+
+    function setActiveDot(index) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index - 1].classList.add('active');
+    }
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+
+            const activeIndex = e.target.getAttribute('data-slide');    // e.target.dataset.slide;
+
+            slideIndex = activeIndex;
+
+            offset = +width.slice(0, width.length - 2) * (activeIndex - 1);
+            slidesField.style.transform = `translateX(-${offset}px)`;
+
+            setCurrentIndex();
+            setActiveDot(slideIndex);
+        });
+    });
+
+    //----------------------------------------------------
+
     slidesField.style.width = 100 * slides.length + '%';
     slidesField.style.display = 'flex';
     slidesField.style.transition = '0.5s all';
@@ -334,6 +375,7 @@ window.addEventListener('DOMContentLoaded', () => {
     next.addEventListener('click', () => {
         if (++slideIndex > slides.length) slideIndex = 1;
         setCurrentIndex();
+        setActiveDot(slideIndex);
 
         if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
             offset = 0;
@@ -346,6 +388,7 @@ window.addEventListener('DOMContentLoaded', () => {
     prev.addEventListener('click', () => {
         if (--slideIndex <= 0) slideIndex = slides.length;
         setCurrentIndex();
+        setActiveDot(slideIndex);
 
         if (offset == 0) {
             offset = +width.slice(0, width.length - 2) * (slides.length - 1);
@@ -356,8 +399,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // auto sliding
+    // setInterval(() => next.click(), 2000);
 
-    setInterval(() => next.click(), 2000);
 
     // function showSlide(index) {
     // if (index < 10) current.textContent = `0${index}`;
@@ -388,5 +431,6 @@ window.addEventListener('DOMContentLoaded', () => {
     //     if (++slideIndex > slides.length) slideIndex = 1;
     //     showSlide(slideIndex);
     // });
+
 
 });
