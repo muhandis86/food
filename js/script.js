@@ -342,13 +342,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
             slideIndex = activeIndex;
 
-            offset = +width.slice(0, width.length - 2) * (activeIndex - 1);
+            offset = toDigits(width) * (activeIndex - 1);
             slidesField.style.transform = `translateX(-${offset}px)`;
 
             setCurrentIndex();
             setActiveDot(slideIndex);
         });
     });
+
+
+    function toDigits(str) {
+        return +str.replace(/\D/g, '');
+    }
 
     //----------------------------------------------------
 
@@ -377,10 +382,10 @@ window.addEventListener('DOMContentLoaded', () => {
         setCurrentIndex();
         setActiveDot(slideIndex);
 
-        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+        if (offset == toDigits(width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += toDigits(width);
         }
         slidesField.style.transform = `translateX(-${offset}px)`;
     });
@@ -391,12 +396,13 @@ window.addEventListener('DOMContentLoaded', () => {
         setActiveDot(slideIndex);
 
         if (offset == 0) {
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+            offset = toDigits(width) * (slides.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= toDigits(width);
         }
         slidesField.style.transform = `translateX(-${offset}px)`;
     });
+
 
     // auto sliding
     // setInterval(() => next.click(), 2000);
