@@ -439,7 +439,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // });
 
 
-    // calc 
+    // calculator 
 
     const result = document.querySelector('.calculating__result span')
 
