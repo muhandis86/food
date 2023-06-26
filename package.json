@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/muhandis86/food#readme",
   "devDependencies": {
-    "json-server": "^0.17.3"
+    "json-server": "^0.17.3",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4"
   }
 }
