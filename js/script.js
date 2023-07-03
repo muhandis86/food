@@ -1,3 +1,12 @@
+require('es6-promise').polyfill();
+import 'nodelist-foreach-polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import 'whatwg-fetch';
+import 'dom-node-polyfills';
+import 'formdata-polyfill';
+
+
 import tabs from './modules/tabs';
 import calc from './modules/calc';
 import cards from './modules/cards';
